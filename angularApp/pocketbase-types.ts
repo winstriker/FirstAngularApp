@@ -34,12 +34,17 @@ export type AuthSystemFields<T = never> = {
 
 export type ClassesRecord = {
 	id?: string
+	created?: string
+	updated?: string
 	name?: string
 	students?: RecordIdString
 	expand?: any
 }
 
 export type StudentsRecord = {
+	id?: string
+	created?: string
+	updated?: string
 	name?: string
 	surname?: string
 	birthDate?: IsoDateString

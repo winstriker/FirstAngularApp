@@ -11,7 +11,8 @@ import { pocketbaseInstance } from 'src/main';
 })
 export class ClassDetailsComponent {
 
-  name: string | undefined = "";
+  
+  _class: ClassesRecord | undefined;
   students : StudentsRecord[] = [];
 
   constructor(private route:ActivatedRoute){
@@ -23,11 +24,13 @@ export class ClassDetailsComponent {
   }
 
   async loadClass(classId : string) : Promise<void>{
-    const _class : ClassesRecord = await pocketbaseInstance.collection(Collections.Classes).getOne(classId, {expand: 'students'})
-    if(_class.students == null){
+    this._class = await pocketbaseInstance.collection(Collections.Classes).getOne(classId, {expand: 'students'})
+    if(this._class == undefined){
+      throw new Error("No class found with id " + classId);
+    }
+    if(this._class.students == null){
       throw new Error("CLASS HAS NO STUDENTS");
     }
-    this.name = _class.name
-    this.students = _class.expand.students
+    this.students = this._class.expand.students
   }
 }
