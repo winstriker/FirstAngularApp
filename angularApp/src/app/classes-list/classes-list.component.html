@@ -1,0 +1,15 @@
+<div id="container">
+    <div class="row align-items-center text-center vstack gap-1 card">
+        
+            <h2 class="card-title">
+                CLASSES
+            </h2>
+        <div class="row p-1" *ngFor="let class of classes">
+            <a class="btn btn-secondary" [routerLink]="['/class', class.id]">
+                <div class="col">
+                    {{class.name}}
+                </div>
+            </a>
+        </div>
+    </div>
+</div>

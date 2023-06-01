@@ -1,0 +1,26 @@
+<div id="container">
+    <div class="row align-items-center text-center vstack gap-1 card">
+
+        <h2 id="card-title">{{name}}</h2>
+
+        <div class="card">
+            <h5 id="card-title">Students</h5>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Surname</th>
+                        <th scope="col">Birth Date</th>
+                    </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                    <tr *ngFor="let student of students">
+                        <td>{{student.name}}</td>
+                        <td>{{student.surname}}</td>
+                        <td>{{student.birthDate}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
