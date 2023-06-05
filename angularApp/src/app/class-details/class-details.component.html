@@ -51,5 +51,10 @@
                 </tbody>
             </table>
         </div>
+        <div class="row">
+            <div class="col-4"></div>
+            <div class="col-2 btn btn-primary" [routerLink]="['/class/edit', _class?.id]">EDIT</div>
+            <div class="col-2 btn btn-danger" (click)="deleteClass()" [routerLink]="['/class']">DELETE</div>
+        </div>
     </div>
 </div>

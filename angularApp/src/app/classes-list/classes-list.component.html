@@ -1,15 +1,53 @@
 <div id="container">
-    <div class="row align-items-center text-center vstack gap-1 card">
-        
-            <h2 class="card-title">
-                CLASSES
-            </h2>
+    <div class="btn btn-primary" [routerLink]="['/']">
+        <i class="bi bi-house"></i>
+    </div>
+    <div class="row align-items-center text-center vstack gap-1">
+
+        <h2 class="card-title">
+            CLASSES
+        </h2>
         <div class="row p-1" *ngFor="let class of classes">
-            <a class="btn btn-secondary" [routerLink]="['/class', class.id]">
-                <div class="col">
-                    {{class.name}}
+            <div class="col-3"></div>
+            <div class="col-4 btn btn-secondary" [routerLink]="['/class', class.id]">
+                {{class.name}}
+            </div>
+            <div [routerLink]="['/class/edit', class.id]" class="col-1 btn btn-primary">EDIT</div>
+            <div class="col-1 btn btn-danger" (click)="deleteClass(class)">X</div>
+        </div>
+        <div class="col-5"></div>
+        <div class="btn btn-success col-2" *ngIf="!addClicked" (click)="addClicked = true">
+            +
+        </div>
+        <div id="class-adder" *ngIf="addClicked">
+            <div class="row">
+                <div class="col-4"></div>
+                <label for="name" class="col-1">Name:</label>
+                <input class="col-2 text-center" type="text" [(ngModel)]="name">
+            </div>
+            <div class="row" *ngFor="let student of selectedStudents">
+                <div class="col-4"></div>
+                <div class="col-3">{{student.name}} {{student.surname}}</div>
+                <div class="col-1 btn btn-danger" (click)="removeStudent(student)">X</div>
+            </div>
+            <div id="add-student-container" *ngIf="allStudents.length > 0">
+                <div class="row">
+                    <div class="col-3"></div>
+                    <select [(ngModel)]="selectedStudent" name="students" id="select-student" class="col-4">
+                        <option *ngFor="let student of allStudents" [ngValue]="student">
+                            {{student.name}} {{student.surname}}</option>
+                    </select>
+                    <div class="col-1"></div>
+                    <div class="btn btn-success col-1" (click)="addStudent()" *ngIf="allIsValid()">+</div>
+                    <div class="btn btn-success col-1 disabled" aria-disabled="true" *ngIf="!allIsValid()">+</div>
                 </div>
-            </a>
+            </div>
+            <div class="row">
+                <div class="col-4"></div>
+                <div class="col-2 btn btn-success" (click)="add()" *ngIf="allIsValid()">ADD</div>
+                <div class="col-2 btn btn-success disabled" *ngIf="!allIsValid()">ADD</div>
+                <div class="col-2 btn btn-danger" (click)="cancel()">CANCEL</div>
+            </div>
         </div>
     </div>
 </div>

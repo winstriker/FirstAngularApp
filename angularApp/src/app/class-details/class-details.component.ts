@@ -33,4 +33,8 @@ export class ClassDetailsComponent {
     }
     this.students = this._class.expand.students
   }
+
+  async deleteClass(){
+    await pocketbaseInstance.collection(Collections.Classes).delete(this._class?.id!!)
+  }
 }

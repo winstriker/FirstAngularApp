@@ -5,16 +5,29 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ClassesListComponent } from './classes-list/classes-list.component';
 import { ClassDetailsComponent } from './class-details/class-details.component';
+import { ClassEditorComponent } from './class-editor/class-editor.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MenuSelectorComponent } from './menu-selector/menu-selector.component';
+import { StudentsListComponent } from './students-list/students-list.component';
+import { StudentsEditorComponent } from './students-editor/students-editor.component';
+import { StudentsDetailsComponent } from './students-details/students-details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ClassesListComponent,
     ClassDetailsComponent,
+    ClassEditorComponent,
+    MenuSelectorComponent,
+    StudentsListComponent,
+    StudentsEditorComponent,
+    StudentsDetailsComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
