@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ClassDetailsComponent } from './class-details/class-details.component';
-import { ClassesListComponent } from './classes-list/classes-list.component';
-import { ClassEditorComponent } from './class-editor/class-editor.component';
-import { MenuSelectorComponent } from './menu-selector/menu-selector.component';
-import { StudentsListComponent } from './students-list/students-list.component';
-import { StudentsEditorComponent } from './students-editor/students-editor.component';
-import { StudentsDetailsComponent } from './students-details/students-details.component';
+import { ClassDetailsComponent } from './features/home/class-details/class-details.component';
+import { ClassesListComponent } from './features/home/classes-list/classes-list.component';
+import { ClassEditorComponent } from './features/home/class-editor/class-editor.component';
+import { StudentsDetailsComponent } from './features/home/students-details/students-details.component';
+import { StudentsListComponent } from './features/home/students-list/students-list.component';
+import { StudentsEditorComponent } from './features/home/students-editor/students-editor.component';
+import { HomeComponent } from './features/home/home.component';
 
 const routes: Routes = [
   { path: 'class', component:ClassesListComponent },
@@ -15,7 +15,7 @@ const routes: Routes = [
   { path: 'student', component:StudentsListComponent },
   { path: 'student/:id', component:StudentsDetailsComponent },
   { path: 'student/edit/:id', component:StudentsEditorComponent },
-  { path:'**', component:MenuSelectorComponent}
+  { path:'**', component:HomeComponent}
 ];
 
 @NgModule({

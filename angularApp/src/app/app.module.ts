@@ -3,14 +3,14 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ClassesListComponent } from './classes-list/classes-list.component';
-import { ClassDetailsComponent } from './class-details/class-details.component';
-import { ClassEditorComponent } from './class-editor/class-editor.component';
+import { ClassDetailsComponent } from './features/home/class-details/class-details.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MenuSelectorComponent } from './menu-selector/menu-selector.component';
-import { StudentsListComponent } from './students-list/students-list.component';
-import { StudentsEditorComponent } from './students-editor/students-editor.component';
-import { StudentsDetailsComponent } from './students-details/students-details.component';
+import { ClassesListComponent } from './features/home/classes-list/classes-list.component';
+import { ClassEditorComponent } from './features/home/class-editor/class-editor.component';
+import { StudentsListComponent } from './features/home/students-list/students-list.component';
+import { StudentsEditorComponent } from './features/home/students-editor/students-editor.component';
+import { StudentsDetailsComponent } from './features/home/students-details/students-details.component';
+import { HomeComponent } from './features/home/home.component';
 
 @NgModule({
   declarations: [
@@ -18,10 +18,10 @@ import { StudentsDetailsComponent } from './students-details/students-details.co
     ClassesListComponent,
     ClassDetailsComponent,
     ClassEditorComponent,
-    MenuSelectorComponent,
     StudentsListComponent,
     StudentsEditorComponent,
     StudentsDetailsComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,

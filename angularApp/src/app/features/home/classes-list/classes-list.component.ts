@@ -9,18 +9,33 @@ import { pocketbaseInstance } from 'src/main';
   styleUrls: ['./classes-list.component.css']
 })
 
-export class ClassesListComponent{
+export class ClassesListComponent {
   classes: ClassesRecord[] = [];
   addClicked: boolean = false;
 
   name = new FormControl('', [Validators.required]);
-  selectedStudents : StudentsRecord[] = [];
-  allStudents : StudentsRecord[] = []
+  selectedStudents: StudentsRecord[] = [];
+  allStudents: StudentsRecord[] = [];
 
-  selectedStudent : StudentsRecord = this.allStudents[0];
+  selectedStudent: StudentsRecord = this.allStudents[0];
 
-  constructor(){
+  constructor() {
     this.loadClasses();
+    pocketbaseInstance.collection(Collections.Classes).subscribe("*", e => {
+      let mappedClass = this.classes.map(it => it.id);
+      if (e.action == "delete") {
+        this.classes.splice(mappedClass.indexOf(e.record.id, 0), 1)
+      } else {
+
+        let index = mappedClass.indexOf(e.record.id);
+        if (index != -1) {
+          this.classes[index] = e.record;
+        }
+        else
+          this.classes.push(e.record)
+      }
+
+    })
   }
   async loadClasses(): Promise<void> {
     this.classes = await pocketbaseInstance.collection(Collections.Classes).getFullList<ClassesResponse>()
@@ -28,8 +43,8 @@ export class ClassesListComponent{
     this.selectedStudent = this.allStudents[0];
   }
 
-  addStudent(){
-    if(this.selectedStudent == undefined){
+  addStudent() {
+    if (this.selectedStudent == undefined) {
       throw new Error("No student selected");
     }
     const index = this.allStudents.indexOf(this.selectedStudent, 0);
@@ -40,7 +55,7 @@ export class ClassesListComponent{
     this.selectedStudent = this.allStudents[0]
   }
 
-  removeStudent(student: StudentsRecord){
+  removeStudent(student: StudentsRecord) {
     const index = this.selectedStudents.indexOf(student, 0);
     if (index > -1) {
       this.selectedStudents.splice(index, 1);
@@ -48,29 +63,25 @@ export class ClassesListComponent{
     this.allStudents.push(student);
   }
 
-  cancel(){
+  cancel() {
     this.selectedStudents.forEach(it => this.allStudents.push(it));
     this.selectedStudents = [];
     this.name.setValue('');
     this.addClicked = false;
   }
 
-  async add(){
-    this.classes.push(await pocketbaseInstance.collection(Collections.Classes).create<ClassesRecord>({ 'name' : this.name.value, 'students': this.selectedStudents.map(it => it.id)}))
+  async add() {
+    await pocketbaseInstance.collection(Collections.Classes).create<ClassesRecord>({ 'name': this.name.value, 'students': this.selectedStudents.map(it => it.id) })
     this.selectedStudents = [];
     this.name.setValue('');
     this.addClicked = false;
   }
 
-  async deleteClass(_class : ClassesRecord){
-    const index = this.classes.indexOf(_class, 0);
-    if (index > -1) {
-      this.classes.splice(index, 1);
-    }
+  async deleteClass(_class: ClassesRecord) {
     await pocketbaseInstance.collection(Collections.Classes).delete(_class.id!!)
   }
 
-  allIsValid(){
+  allIsValid() {
     return this.name.valid;
   }
 }

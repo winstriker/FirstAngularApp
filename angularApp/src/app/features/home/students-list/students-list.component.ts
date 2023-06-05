@@ -18,6 +18,21 @@ export class StudentsListComponent {
 
   constructor(){
     this.loadStudents();
+    pocketbaseInstance.collection(Collections.Students).subscribe("*", e => {
+      let mappedClass = this.students.map(it => it.id);
+      if (e.action == "delete") {
+        this.students.splice(mappedClass.indexOf(e.record.id, 0), 1)
+      } else {
+
+        let index = mappedClass.indexOf(e.record.id);
+        if (index != -1) {
+          this.students[index] = e.record;
+        }
+        else
+          this.students.push(e.record)
+      }
+
+    })
   }
 
   cancel(){
@@ -28,7 +43,7 @@ export class StudentsListComponent {
   }
 
   async add(){
-    this.students.push(await pocketbaseInstance.collection(Collections.Students).create<StudentsRecord>({ 'name' : this.name.value, 'surname': this.surname.value, 'birthDate' : (new Date(this.birthDay.value!!)).toISOString()}))
+    await pocketbaseInstance.collection(Collections.Students).create<StudentsRecord>({ 'name' : this.name.value, 'surname': this.surname.value, 'birthDate' : (new Date(this.birthDay.value!!)).toISOString()})
     this.name.setValue("");
     this.surname.setValue("")
     this.birthDay.setValue((new Date()).toISOString().slice(0, -1))
@@ -36,10 +51,6 @@ export class StudentsListComponent {
   }
 
   async deleteStudent(student : StudentsRecord){
-    const index = this.students.indexOf(student, 0);
-    if (index > -1) {
-      this.students.splice(index, 1);
-    }
     await pocketbaseInstance.collection(Collections.Students).delete(student.id!!)
   }
 
