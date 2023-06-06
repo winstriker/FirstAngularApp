@@ -23,7 +23,6 @@ export class StudentsListComponent {
       if (e.action == "delete") {
         this.students.splice(mappedClass.indexOf(e.record.id, 0), 1)
       } else {
-
         let index = mappedClass.indexOf(e.record.id);
         if (index != -1) {
           this.students[index] = e.record;

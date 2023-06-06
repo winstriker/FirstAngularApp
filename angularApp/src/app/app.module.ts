@@ -11,6 +11,7 @@ import { StudentsListComponent } from './features/home/students-list/students-li
 import { StudentsEditorComponent } from './features/home/students-editor/students-editor.component';
 import { StudentsDetailsComponent } from './features/home/students-details/students-details.component';
 import { HomeComponent } from './features/home/home.component';
+import { NavbarComponent } from './core/navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { HomeComponent } from './features/home/home.component';
     StudentsEditorComponent,
     StudentsDetailsComponent,
     HomeComponent,
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,
