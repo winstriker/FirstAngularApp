@@ -12,6 +12,7 @@ import { StudentsEditorComponent } from './features/home/students-editor/student
 import { StudentsDetailsComponent } from './features/home/students-details/students-details.component';
 import { HomeComponent } from './features/home/home.component';
 import { NavbarComponent } from './core/navbar/navbar.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { NavbarComponent } from './core/navbar/navbar.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]
